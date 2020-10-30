@@ -16,7 +16,7 @@ videoRouter.post('/', async (req, res) => {
 
 videoRouter.get('/', async (req, res) => {
   const repository = getCustomRepository(VideoRepository);
-  const videos = await repository.find();
+  const videos = await repository.find({order: {title: "ASC"}});
 
   return res.status(200).json(videos);
 });
