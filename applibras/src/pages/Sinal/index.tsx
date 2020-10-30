@@ -1,13 +1,16 @@
 import React from 'react';
 import { Dimensions, Linking } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { 
   Title,
   SignWriting,
   Description,
   SignInfo,
+  About,
+  TextAbout,
+  Icon,
 } from './styles';
 
 import { 
@@ -21,8 +24,8 @@ import Button from './../../components/Button';
 
 interface Params {
   title: string;
-  videoURL: string;
-  imageURL: string,
+  video_url: string;
+  image_url: string,
   description: string;
   tags: string[];
 }
@@ -30,10 +33,12 @@ interface Params {
 const Sinal: React.FC = () => {
   const route = useRoute();
   const routeParams = route.params as Params;
+  const navigation = useNavigation();
   
   async function handleComposeMail(){
 
-    let to = 'lidialopes@acad.ifma.edu.br', subject = 'Sugestão de Correção';
+    let to = 'lidialopes@acad.ifma.edu.br';
+    let subject = 'Sugestão de Correção';
 
     const url = `mailto:${to}?subject=${subject}`
 
@@ -42,13 +47,17 @@ const Sinal: React.FC = () => {
     }    
   }
 
+  function handleNavigationToAbout(){
+    navigation.navigate('About');
+  }
+
   return (
     <Container>
       <SignInfo>
         <YoutubePlayer
           height={(Dimensions.get('window').width - 60) * 0.5625}
           width={Dimensions.get('window').width - 60}
-          videoId={routeParams.videoURL}
+          videoId={routeParams.video_url}
           initialPlayerParams={{}}
         />
         <VideoTitle>{routeParams.title}</VideoTitle>
@@ -60,7 +69,7 @@ const Sinal: React.FC = () => {
 
         <Title>Escrita do Sinal</Title>
         <SignWriting
-          source={{uri: routeParams.imageURL}}
+          source={{uri: routeParams.image_url}}
         />
         
         <Title>Descrição</Title>
@@ -68,6 +77,10 @@ const Sinal: React.FC = () => {
       </SignInfo>
 
       <Button onPress={handleComposeMail}>Sugerir Correção</Button>
+      <About activeOpacity={0.5} onPress={handleNavigationToAbout}>
+        <Icon name="info" color="#bdbdbd" size={20} />
+        <TextAbout>Sobre</TextAbout>
+      </About>
     </Container>
   );
 };

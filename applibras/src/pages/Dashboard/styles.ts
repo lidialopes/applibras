@@ -36,10 +36,11 @@ export const VideoTitle = styled.Text`
 export const TagsWrapper = styled.View`
   margin-top: 7px;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const Tag = styled.Text`
-  margin-right: 7px;
+  margin: 0 7px 4px 0;
 
   font-family: 'OpenSans-SemiBold';
   font-size: 10px;

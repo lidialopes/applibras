@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 export const Title = styled.Text`
   margin: 20px 0 5px;
@@ -23,4 +24,20 @@ export const Description = styled.Text`
 
 export const SignInfo = styled.ScrollView`
   margin-bottom: 15px;
+`;
+
+export const About = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+export const TextAbout = styled.Text`
+  font-family: 'OpenSans';
+  font-size: 15px;
+  color: #bdbdbd;
+`;
+
+export const Icon = styled(FeatherIcon)`
+  margin-right: 5px;
 `;
