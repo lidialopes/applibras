@@ -51,3 +51,15 @@ export const Tag = styled.Text`
   background: #424242;
   border-radius: 4px;
 `;
+
+export const EmptyListText = styled.Text`
+  font-family: OpenSans-SemiBold;
+  font-size: 20px;
+  color: #ababab;
+  text-align: center;
+  margin-top: 15px;
+`;
+
+export const ActivityIndicator = styled.ActivityIndicator`
+  flex-grow: 1;
+`;

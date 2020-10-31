@@ -15,6 +15,8 @@ import {
   VideoTitle,
   TagsWrapper,
   Tag,
+  EmptyListText,
+  ActivityIndicator,
 } from './styles';
 
 export interface Video {
@@ -30,6 +32,27 @@ const Dashboard: React.FC = () => {
   const navigation = useNavigation();
   
   const [data, setData] = useState<Video[]>();
+  const [filteredData, setFilteredData] = useState<Video[]>();
+  const [searchText, setSearchText] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const emptyListMessage = () => {
+    return (
+      <EmptyListText>
+        Ops... Não temos esse sinal. Fique à vontade pra sugerir a inclusão dele!
+      </EmptyListText>
+    )
+  }
+
+  function search(text: string){
+    let filtered = data?.filter(function (item: Video){
+      let itemData = item.title ? item.title.toLowerCase() : '';
+      let textData = text.toLowerCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    setFilteredData(filtered);
+    setSearchText(text);
+  }
 
   function handleNavigateToSinal(item: Video){
     navigation.navigate('Sinal', item);
@@ -48,22 +71,35 @@ const Dashboard: React.FC = () => {
   }
 
   useEffect(() => {
-    api.get('video').then(response => (
-      setData(response.data)
-    ))
+    api.get('video').then(response => {
+      setData(response.data);
+      setFilteredData(response.data)
+      setIsLoading(false);
+    }
+    );
   }, []);
 
-  if(!data){
-    return null;
+  if(isLoading){
+    return (
+      <Container>
+        <ActivityIndicator size="large" color="#007BF9"/>
+      </Container>
+    );
   }
 
   return (
     <Container>
-      <Input name="busca" icon="search" placeholder="Pesquisar sinal" />
+      <Input name="busca" 
+        icon="search" 
+        placeholder="Pesquisar sinal"
+        onChangeText={searchText => search(searchText)}
+        value={searchText}
+      />
 
       <VideoList
-        data={data}
+        data={filteredData}
         keyExtractor={(videoData : Video) => videoData.id}
+        ListEmptyComponent={emptyListMessage}
         renderItem={({ item } : { item : Video}) => (
           <TouchableOpacity activeOpacity={0.7} onPress={() => handleNavigateToSinal(item)}>
             <VideoContainer>
