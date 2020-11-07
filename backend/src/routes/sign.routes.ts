@@ -16,9 +16,9 @@ signRouter.post('/', async (req, res) => {
 
 signRouter.get('/', async (req, res) => {
   const repository = getCustomRepository(SignRepository);
-  const videos = await repository.find({order: {title: "ASC"}});
+  const signs = await repository.find({order: {title: "ASC"}});
 
-  return res.status(200).json(videos);
+  return res.status(200).json(signs);
 });
 
 signRouter.get('/:id', async (req, res) => {
