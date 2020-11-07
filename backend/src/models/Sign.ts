@@ -6,8 +6,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('video')
-class Video {
+@Entity('sign')
+class Sign {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -23,7 +23,7 @@ class Video {
   @Column()
   description: string;
 
-  @Column("varchar", { array: true })
+  @Column('json')
   tags: string[];
 
   @CreateDateColumn()
@@ -33,4 +33,4 @@ class Video {
   updated_at: Date;
 }
 
-export default Video;
+export default Sign;

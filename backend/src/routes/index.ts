@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import videoRouter from './video.routes';
+import signRouter from './sign.routes';
 
 const routes = Router();
 
-routes.use('/video', videoRouter);
+routes.use('/sign', signRouter);
 
 export default routes;
