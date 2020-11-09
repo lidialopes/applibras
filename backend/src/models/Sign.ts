@@ -23,7 +23,7 @@ class Sign {
   @Column()
   description: string;
 
-  @Column('json')
+  @Column('varchar', { array: true })
   tags: string[];
 
   @CreateDateColumn()

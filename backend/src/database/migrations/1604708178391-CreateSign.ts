@@ -2,7 +2,9 @@ import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
 export default class CreateSign1604708178391 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createTable(
+      await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
+      
+      await queryRunner.createTable(
             new Table({
               name: 'sign',
               columns: [
@@ -12,6 +14,7 @@ export default class CreateSign1604708178391 implements MigrationInterface {
                   length: '36',
                   isPrimary: true,
                   generationStrategy: 'uuid',
+                  default: 'uuid_generate_v4()',
                 },
                 {
                   name: 'title',
@@ -31,7 +34,7 @@ export default class CreateSign1604708178391 implements MigrationInterface {
                 },
                 {
                   name: 'tags',
-                  type: 'json',
+                  type: 'character varying[]',
                 },
                 {
                   name: 'created_at',
