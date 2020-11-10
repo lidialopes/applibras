@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 import { Container } from './../Dashboard/styles';
-import { Title } from './../Sinal/styles';
+import { Title } from './../Sign/styles';
 
 export interface Info {
     imageSource: string;

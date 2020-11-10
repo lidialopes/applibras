@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 
-import { Video } from './index';
+import { Sign } from './index';
 
 export const Container = styled.View`
   width: 100%;
@@ -10,11 +10,11 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const VideoList = styled(FlatList as new () => FlatList<Video>)`
+export const SignList = styled(FlatList as new () => FlatList<Sign>)`
   margin: 10px 0 15px;
 `;
 
-export const VideoContainer = styled.View`
+export const SignContainer = styled.View`
   margin-bottom: 5px;
   padding: 5px;
 `;
@@ -26,7 +26,7 @@ export const SignImage = styled.Image`
   resize-mode: cover;
 `;
 
-export const VideoTitle = styled.Text`
+export const SignTitle = styled.Text`
   margin: 5px 0 0;
   font-family: 'OpenSans-SemiBold';
   font-size: 18px;

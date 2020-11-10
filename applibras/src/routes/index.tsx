@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Dashboard from '../pages/Dashboard';
-import Sinal from '../pages/Sinal';
+import Sign from '../pages/Sign';
 import About from '../pages/About';
 
 const App = createStackNavigator();
@@ -15,7 +15,7 @@ const AppRoutes: React.FC = () => (
     }}
   >
     <App.Screen name="Dashboard" component={Dashboard} />
-    <App.Screen name="Sinal" component={Sinal} />
+    <App.Screen name="Sign" component={Sign} />
     <App.Screen name= "About" component={About}/>
   </App.Navigator>
 );

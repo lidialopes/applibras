@@ -9,17 +9,17 @@ import api from '../../services/api';
 
 import {
   Container,
-  VideoList,
-  VideoContainer,
+  SignList,
+  SignContainer,
   SignImage,
-  VideoTitle,
+  SignTitle,
   TagsWrapper,
   Tag,
   EmptyListText,
   ActivityIndicator,
 } from './styles';
 
-export interface Video {
+export interface Sign {
   id: string;
   title: string;
   video_url: string;
@@ -31,8 +31,8 @@ export interface Video {
 const Dashboard: React.FC = () => {
   const navigation = useNavigation();
   
-  const [data, setData] = useState<Video[]>();
-  const [filteredData, setFilteredData] = useState<Video[]>();
+  const [data, setData] = useState<Sign[]>();
+  const [filteredData, setFilteredData] = useState<Sign[]>();
   const [searchText, setSearchText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
   }
 
   function search(text: string){
-    let filtered = data?.filter(function (item: Video){
+    let filtered = data?.filter(function (item: Sign){
       let itemData = item.title ? item.title.toLowerCase() : '';
       let textData = text.toLowerCase();
       return itemData.indexOf(textData) > -1;
@@ -54,8 +54,8 @@ const Dashboard: React.FC = () => {
     setSearchText(text);
   }
 
-  function handleNavigateToSinal(item: Video){
-    navigation.navigate('Sinal', item);
+  function handleNavigateToSign(item: Sign){
+    navigation.navigate('Sign', item);
   }
 
   async function handleComposeMail(){
@@ -71,7 +71,7 @@ const Dashboard: React.FC = () => {
   }
 
   useEffect(() => {
-    api.get('video').then(response => {
+    api.get('sign').then(response => {
       setData(response.data);
       setFilteredData(response.data)
       setIsLoading(false);
@@ -96,21 +96,21 @@ const Dashboard: React.FC = () => {
         value={searchText}
       />
 
-      <VideoList
+      <SignList
         data={filteredData}
-        keyExtractor={(videoData : Video) => videoData.id}
+        keyExtractor={(signData : Sign) => signData.id}
         ListEmptyComponent={emptyListMessage}
-        renderItem={({ item } : { item : Video}) => (
-          <TouchableOpacity activeOpacity={0.7} onPress={() => handleNavigateToSinal(item)}>
-            <VideoContainer>
+        renderItem={({ item } : { item : Sign}) => (
+          <TouchableOpacity activeOpacity={0.7} onPress={() => handleNavigateToSign(item)}>
+            <SignContainer>
               <SignImage source={{uri: `https://img.youtube.com/vi/${item.video_url}/hqdefault.jpg`}} />
-              <VideoTitle>{item.title}</VideoTitle>
+              <SignTitle>{item.title}</SignTitle>
               <TagsWrapper>
                 {item.tags.map(tag => (
                   <Tag key={tag}>{tag}</Tag>
                 ))}
               </TagsWrapper>
-            </VideoContainer>
+            </SignContainer>
           </TouchableOpacity>
         )}
       />

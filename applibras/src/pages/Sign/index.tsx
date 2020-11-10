@@ -15,7 +15,7 @@ import {
 
 import { 
   Container,
-  VideoTitle,
+  SignTitle,
   TagsWrapper,
   Tag 
 } from './../Dashboard/styles'
@@ -30,7 +30,7 @@ interface Params {
   tags: string[];
 }
 
-const Sinal: React.FC = () => {
+const Sign: React.FC = () => {
   const route = useRoute();
   const routeParams = route.params as Params;
   const navigation = useNavigation();
@@ -60,7 +60,7 @@ const Sinal: React.FC = () => {
           videoId={routeParams.video_url}
           initialPlayerParams={{}}
         />
-        <VideoTitle>{routeParams.title}</VideoTitle>
+        <SignTitle>{routeParams.title}</SignTitle>
         <TagsWrapper>
           {routeParams.tags.map(tag => (
             <Tag key={tag}>{tag}</Tag>
@@ -85,4 +85,4 @@ const Sinal: React.FC = () => {
   );
 };
 
-export default Sinal;
+export default Sign;
